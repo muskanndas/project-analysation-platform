@@ -30,6 +30,13 @@ const userSchema = new mongoose.Schema({
       return ['student', 'admin', 'mentor'].includes(this.role);
     }
   },
+  expertise: {
+    type: String,
+    trim: true,
+    required: function () {
+      return this.role === 'mentor';
+    }
+  },
   otp: {
     type: String
   },

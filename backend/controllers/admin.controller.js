@@ -3,13 +3,27 @@ import User from '../models/user.model.js';
 
 export const createMentor = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, department, expertise } = req.body;
     const adminDept = req.user.department;
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !department || !expertise) {
       return res.status(400).json({
         success: false,
-        message: 'Name, email, and password are required'
+        message: 'Name, email, password, department, and expertise are required'
+      });
+    }
+
+    if (String(department).trim() !== adminDept) {
+      return res.status(403).json({
+        success: false,
+        message: 'You can only create mentors for your own department'
+      });
+    }
+
+    if (String(password).length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'Password must be at least 6 characters long'
       });
     }
 
@@ -29,7 +43,8 @@ export const createMentor = async (req, res) => {
       email: normalizedEmail,
       password: hashedPassword,
       role: 'mentor',
-      department: adminDept
+      department: adminDept,
+      expertise: String(expertise).trim()
     });
 
     await mentor.save();
@@ -42,7 +57,8 @@ export const createMentor = async (req, res) => {
         name: mentor.name,
         email: mentor.email,
         role: mentor.role,
-        department: mentor.department
+        department: mentor.department,
+        expertise: mentor.expertise
       }
     });
   } catch (error) {
