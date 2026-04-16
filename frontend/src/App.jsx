@@ -20,6 +20,9 @@ import MentorProjectReviewPage from './pages/MentorProjectReviewPage';
 import MentorProjectProgressPage from './pages/MentorProjectProgressPage';
 import MentorProjectFeedbackPage from './pages/MentorProjectFeedbackPage';
 import StudentFeedbackPage from './pages/StudentFeedbackPage';
+import StudentTaskBoardPage from './pages/StudentTaskBoardPage';
+import StudentTaskCreatePage from './pages/StudentTaskCreatePage';
+import StudentMyTasksPage from './pages/StudentMyTasksPage';
 
 function App() {
   return (
@@ -71,6 +74,9 @@ function App() {
             <Route path="project/create" element={<ProjectCreatePage />} />
             <Route path="project" element={<ProjectDetailsPage />} />
             <Route path="feedback" element={<StudentFeedbackPage />} />
+            <Route path="tasks" element={<StudentTaskBoardPage />} />
+            <Route path="tasks/create" element={<StudentTaskCreatePage />} />
+            <Route path="tasks/my" element={<StudentMyTasksPage />} />
           </Route>
           
           <Route path="/" element={<Navigate to="/login" replace />} />

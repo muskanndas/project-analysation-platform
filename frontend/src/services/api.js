@@ -67,4 +67,13 @@ export const feedbackAPI = {
   getStudentFeedback: () => api.get('/feedback/student/my-feedback')
 };
 
+export const ticketAPI = {
+  getProjectTickets: (projectId) => api.get(`/ticket/project/${projectId}`),
+  createTicket: (payload) => api.post('/ticket/create', payload),
+  getMyTasks: () => api.get('/ticket/my-tasks'),
+  updateStatus: (payload) => api.patch('/ticket/update-status', payload),
+  deleteTicket: (ticketId) => api.delete(`/ticket/${ticketId}`),
+  getProjectProgress: (projectId) => api.get(`/ticket/project/${projectId}/progress`)
+};
+
 export default api;

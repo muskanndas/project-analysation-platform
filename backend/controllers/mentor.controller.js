@@ -1,6 +1,6 @@
 import Project from '../models/project.model.js';
 import ProjectReview from '../models/projectReview.model.js';
-import Task from '../models/task.model.js';
+import Ticket from '../models/ticket.model.js';
 import ActivityLog from '../models/activityLog.model.js';
 import Report from '../models/report.model.js';
 
@@ -121,14 +121,14 @@ export const getProjectProgress = async (req, res) => {
     }
 
     const [tasks, activityLogs, reports] = await Promise.all([
-      Task.find({ project: project._id }).populate('assignedTo', 'name email').sort({ createdAt: -1 }),
+      Ticket.find({ projectId: project._id }).populate('assignedTo', 'name email').sort({ createdAt: -1 }),
       ActivityLog.find({ project: project._id }).populate('actor', 'name email').sort({ createdAt: -1 }).limit(20),
       Report.find({ project: project._id }).sort({ createdAt: -1 })
     ]);
 
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter((task) => task.status === 'completed').length;
-    const inProgressTasks = tasks.filter((task) => task.status === 'in_progress').length;
+    const inProgressTasks = tasks.filter((task) => task.status === 'in-progress').length;
     const pendingTasks = tasks.filter((task) => task.status === 'pending').length;
     const progress = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
 
@@ -167,7 +167,7 @@ export const getProjectTasks = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Task view is available only for approved projects.' });
     }
 
-    const tasks = await Task.find({ project: project._id })
+    const tasks = await Ticket.find({ projectId: project._id })
       .populate('assignedTo', 'name email')
       .sort({ createdAt: -1 });
 

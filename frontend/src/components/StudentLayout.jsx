@@ -9,6 +9,9 @@ const navItemToPath = {
   'add-members': '/student/team',
   'submit-project': '/student/project/create',
   'project-details': '/student/project',
+  'tasks-board': '/student/tasks',
+  'create-task': '/student/tasks/create',
+  'my-tasks': '/student/tasks/my',
   'mentor-feedback': '/student/feedback',
   messages: '/student/dashboard',
   'my-profile': '/student/dashboard'
@@ -19,6 +22,9 @@ const pathToSelectedItem = (pathname) => {
   if (pathname.startsWith('/student/team')) return 'my-team';
   if (pathname.startsWith('/student/project/create')) return 'submit-project';
   if (pathname.startsWith('/student/project')) return 'project-details';
+  if (pathname.startsWith('/student/tasks/create')) return 'create-task';
+  if (pathname.startsWith('/student/tasks/my')) return 'my-tasks';
+  if (pathname.startsWith('/student/tasks')) return 'tasks-board';
   if (pathname.startsWith('/student/feedback')) return 'mentor-feedback';
   return 'student-dashboard';
 };
@@ -61,6 +67,16 @@ const StudentLayout = () => {
         items: [
           { id: 'mentor-feedback', label: 'Mentor Feedback' },
           { id: 'messages', label: 'Messages' }
+        ]
+      },
+      {
+        id: 'task-management',
+        label: 'Task Management',
+        defaultExpanded: true,
+        items: [
+          { id: 'tasks-board', label: 'Task Board' },
+          { id: 'create-task', label: 'Create Task' },
+          { id: 'my-tasks', label: 'My Tasks' }
         ]
       }
     ],
