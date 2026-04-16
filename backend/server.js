@@ -8,6 +8,8 @@ import adminRoutes from './routes/admin.routes.js';
 import studentRoutes from './routes/student.routes.js';
 import teamRoutes from './routes/team.routes.js';
 import projectRoutes from './routes/project.routes.js';
+import mentorRoutes from './routes/mentor.routes.js';
+import feedbackRoutes from './routes/feedback.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -33,6 +35,8 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/student', studentRoutes);
 app.use('/api/team', teamRoutes);
 app.use('/api/project', projectRoutes);
+app.use('/api/mentor', mentorRoutes);
+app.use('/api/feedback', feedbackRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

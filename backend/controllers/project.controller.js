@@ -59,7 +59,7 @@ export const createProject = async (req, res) => {
 
     let project = await Project.findOne({ team: team._id });
     const isResubmission = Boolean(project);
-    if (project && project.status !== 'rejected') {
+    if (project && !['rejected', 'changes_requested'].includes(project.status)) {
       return res.status(400).json({ success: false, message: 'This team already has a project submission.' });
     }
 

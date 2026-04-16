@@ -51,4 +51,20 @@ export const projectAPI = {
   getMyProject: () => api.get('/project/my-project')
 };
 
+export const mentorAPI = {
+  getProjects: (status) => api.get('/mentor/projects', { params: status ? { status } : {} }),
+  getReviewProject: (projectId) => api.get(`/mentor/project/${projectId}/review`),
+  reviewProject: (payload) => api.post('/mentor/project/review', payload),
+  getReviews: (projectId) => api.get(`/mentor/project/reviews/${projectId}`),
+  getProjectProgress: (projectId) => api.get(`/mentor/project/${projectId}/progress`),
+  getProjectTasks: (projectId) => api.get(`/mentor/project/${projectId}/tasks`)
+};
+
+export const feedbackAPI = {
+  createFeedback: (payload) => api.post('/feedback/create', payload),
+  getProjectFeedback: (projectId) => api.get(`/feedback/project/${projectId}`),
+  updateStatus: (feedbackId, status) => api.patch(`/feedback/update-status/${feedbackId}`, { status }),
+  getStudentFeedback: () => api.get('/feedback/student/my-feedback')
+};
+
 export default api;

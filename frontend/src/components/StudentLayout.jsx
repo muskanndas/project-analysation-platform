@@ -9,7 +9,7 @@ const navItemToPath = {
   'add-members': '/student/team',
   'submit-project': '/student/project/create',
   'project-details': '/student/project',
-  'mentor-feedback': '/student/dashboard',
+  'mentor-feedback': '/student/feedback',
   messages: '/student/dashboard',
   'my-profile': '/student/dashboard'
 };
@@ -19,6 +19,7 @@ const pathToSelectedItem = (pathname) => {
   if (pathname.startsWith('/student/team')) return 'my-team';
   if (pathname.startsWith('/student/project/create')) return 'submit-project';
   if (pathname.startsWith('/student/project')) return 'project-details';
+  if (pathname.startsWith('/student/feedback')) return 'mentor-feedback';
   return 'student-dashboard';
 };
 
