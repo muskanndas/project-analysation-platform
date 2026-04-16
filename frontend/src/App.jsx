@@ -6,10 +6,15 @@ import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard';
 import StudentDashboard from './pages/StudentDashboard';
 import MentorDashboard from './pages/MentorDashboard';
+import StudentLayout from './components/StudentLayout';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import VerifyOtp from './pages/VerifyOtp';
 import ResetPassword from './pages/ResetPassword';
+import TeamCreatePage from './pages/TeamCreatePage';
+import TeamDashboardPage from './pages/TeamDashboardPage';
+import ProjectCreatePage from './pages/ProjectCreatePage';
+import ProjectDetailsPage from './pages/ProjectDetailsPage';
 
 function App() {
   return (
@@ -40,14 +45,21 @@ function App() {
             } 
           />
           
-          <Route 
-            path="/student" 
+          <Route
+            path="/student"
             element={
               <ProtectedRoute requiredRole="student">
-                <StudentDashboard />
+                <StudentLayout />
               </ProtectedRoute>
-            } 
-          />
+            }
+          >
+            <Route index element={<Navigate to="/student/dashboard" replace />} />
+            <Route path="dashboard" element={<StudentDashboard />} />
+            <Route path="team/create" element={<TeamCreatePage />} />
+            <Route path="team" element={<TeamDashboardPage />} />
+            <Route path="project/create" element={<ProjectCreatePage />} />
+            <Route path="project" element={<ProjectDetailsPage />} />
+          </Route>
           
           <Route path="/" element={<Navigate to="/login" replace />} />
         </Routes>

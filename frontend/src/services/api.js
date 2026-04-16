@@ -35,4 +35,20 @@ export const adminAPI = {
   getDepartmentOverview: () => api.get('/admin/department-overview'),
 };
 
+export const studentAPI = {
+  getDashboard: () => api.get('/student/dashboard')
+};
+
+export const teamAPI = {
+  createTeam: (payload) => api.post('/team/create', payload),
+  getMyTeam: () => api.get('/team/my-team'),
+  addMember: (payload) => api.post('/team/add-member', payload),
+  removeMember: (userId) => api.delete(`/team/remove-member/${userId}`)
+};
+
+export const projectAPI = {
+  createProject: (payload) => api.post('/project/create', payload),
+  getMyProject: () => api.get('/project/my-project')
+};
+
 export default api;

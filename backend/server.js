@@ -5,6 +5,9 @@ import { connectDB } from './config/db.js';
 
 import authRoutes from './routes/auth.routes.js';
 import adminRoutes from './routes/admin.routes.js';
+import studentRoutes from './routes/student.routes.js';
+import teamRoutes from './routes/team.routes.js';
+import projectRoutes from './routes/project.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +30,9 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/student', studentRoutes);
+app.use('/api/team', teamRoutes);
+app.use('/api/project', projectRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
