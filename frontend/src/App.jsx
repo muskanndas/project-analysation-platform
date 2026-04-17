@@ -8,6 +8,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import MentorDashboard from './pages/MentorDashboard';
 import StudentLayout from './components/StudentLayout';
 import MentorLayout from './components/MentorLayout';
+import AdminLayout from './components/AdminLayout';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 import VerifyOtp from './pages/VerifyOtp';
@@ -23,6 +24,11 @@ import StudentFeedbackPage from './pages/StudentFeedbackPage';
 import StudentTaskBoardPage from './pages/StudentTaskBoardPage';
 import StudentTaskCreatePage from './pages/StudentTaskCreatePage';
 import StudentMyTasksPage from './pages/StudentMyTasksPage';
+import StudentManagement from './pages/StudentManagement';
+import MentorManagement from './pages/MentorManagement';
+import ProjectMonitoring from './pages/ProjectMonitoring';
+import TaskMonitoring from './pages/TaskMonitoring';
+import MentorMonitoring from './pages/MentorMonitoring';
 
 function App() {
   return (
@@ -35,14 +41,22 @@ function App() {
           <Route path="/verify-otp" element={<VerifyOtp />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           
-          <Route 
-            path="/admin" 
+          <Route
+            path="/admin"
             element={
               <ProtectedRoute requiredRole="admin">
-                <AdminDashboard />
+                <AdminLayout />
               </ProtectedRoute>
-            } 
-          />
+            }
+          >
+            <Route index element={<Navigate to="/admin/dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="students" element={<StudentManagement />} />
+            <Route path="mentors" element={<MentorManagement />} />
+            <Route path="projects" element={<ProjectMonitoring />} />
+            <Route path="tasks" element={<TaskMonitoring />} />
+            <Route path="mentor-monitoring" element={<MentorMonitoring />} />
+          </Route>
           
           <Route
             path="/mentor"

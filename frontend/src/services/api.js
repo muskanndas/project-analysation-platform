@@ -31,8 +31,19 @@ export const authAPI = {
 };
 
 export const adminAPI = {
-  createMentor: (mentorData) => api.post('/admin/create-mentor', mentorData),
+  getDashboard: () => api.get('/admin/dashboard'),
+  getStudents: () => api.get('/admin/students'),
+  deleteStudent: (id) => api.delete(`/admin/student/${id}`),
+  getMentors: () => api.get('/admin/mentors'),
+  createMentor: (mentorData) => api.post('/admin/mentor/create', mentorData),
+  deleteMentor: (id) => api.delete(`/admin/mentor/${id}`),
+  getProjects: (status) => api.get('/admin/projects', { params: status ? { status } : {} }),
+  getTasks: () => api.get('/admin/tasks'),
+  getMentorMonitoring: () => api.get('/admin/mentor-monitoring'),
+
+  // Backwards-compatible endpoints (older admin screen)
   getDepartmentOverview: () => api.get('/admin/department-overview'),
+  createMentorLegacy: (mentorData) => api.post('/admin/create-mentor', mentorData),
 };
 
 export const studentAPI = {
